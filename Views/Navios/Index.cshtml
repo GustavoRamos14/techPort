@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TechPort.Models.Navio>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Navios</h1>
+
+<p>
+    @Html.ActionLink("Cadastrar Novo Navio", "Create", new {id = "" }, new {@class = "btn btn-primary"})
+</p>
+<table id="tabela-navios" class="table table-secondary table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Empresa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Empresa.Nome)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new {id = item.Id}, new {@class = "btn btn-outline-primary"})
+                    @Html.ActionLink("Detalhes", "Details", new {id = item.Id }, new {@class = "btn btn-outline-primary"})
+                    @Html.ActionLink("Excluir", "Delete", new {id = item.Id}, new {@class = "btn btn-outline-danger"})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#tabela-navios').DataTable({
+                "language": {
+                    "url":"//cdn.datatables.net/plug-ins/1.13.4/i18n/pt-BR.json"
+            }
+            });
+        });
+    </script>
+}
